@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Dr. Asha Mehra",
+    "role": "President",
+    "department": "Department of Computer Science",
+    "batch": "Batch of 2005",
+    "email": "asha.mehra@alumni.edu",
+    "linkedin": "https://linkedin.com/in/ashamehra",
+    "image": "/images/committee/asha-mehra.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Ravi Sharma",
+    "role": "Vice President",
+    "department": "Department of Mechanical Engineering",
+    "batch": "Batch of 2010",
+    "email": "ravi.sharma@alumni.edu",
+    "linkedin": "https://linkedin.com/in/ravisharma",
+    "image": "/images/committee/ravi-sharma.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Neha Kapoor",
+    "role": "Secretary",
+    "department": "Department of Civil Engineering",
+    "batch": "Batch of 2012",
+    "email": "neha.kapoor@alumni.edu",
+    "linkedin": "https://linkedin.com/in/nehakapoor",
+    "image": "/images/committee/neha-kapoor.jpg"
+  }
+]

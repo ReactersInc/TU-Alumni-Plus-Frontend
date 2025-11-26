@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Silver Jubilee Reunion - Batch of 1999",
+    "description": "A grand celebration of 25 years of friendship, learning, and shared memories. Alumni gathered from across the globe to revisit their alma mater.",
+    "category": "Silver Jubilee",
+    "year": "2024",
+    "date": "February 10, 2024",
+    "time": "10:00 AM - 5:00 PM",
+    "location": "Main Auditorium, Tezpur University",
+    "attendees": 180,
+    "image": "/images/reunions/silver-jubilee-2024.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Departmental Reunion - Computer Science Alumni Meet",
+    "description": "CS alumni reconnected with professors and current students, sharing insights on emerging tech trends and opportunities.",
+    "category": "Departmental",
+    "year": "2023",
+    "date": "December 18, 2023",
+    "time": "9:00 AM - 4:00 PM",
+    "location": "Department Seminar Hall",
+    "attendees": 120,
+    "image": "/images/reunions/cs-reunion-2023.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Annual Alumni Meet 2022",
+    "description": "The annual gathering brought together alumni from all departments to network, share stories, and celebrate the growing alumni community.",
+    "category": "Annual",
+    "year": "2022",
+    "date": "November 20, 2022",
+    "time": "6:00 PM - 9:00 PM",
+    "location": "University Convention Center",
+    "attendees": 350,
+    "image": "/images/reunions/annual-2022.jpg"
+  }
+]

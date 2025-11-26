@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "title": "Alumni Reunion 2024",
+    "description": "A wonderful evening reconnecting with old classmates and sharing achievements.",
+    "category": "Formal",
+    "date": "March 15, 2024",
+    "time": "6:00 PM - 9:00 PM",
+    "location": "University Auditorium",
+    "attendees": 220,
+    "image": "/images/past-events/reunion2024.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Career Networking Night",
+    "description": "Industry professionals and alumni came together to mentor current students.",
+    "category": "Networking",
+    "date": "January 22, 2024",
+    "time": "5:00 PM - 8:00 PM",
+    "location": "Main Hall",
+    "attendees": 150,
+    "image": "/images/past-events/networking2024.jpg"
+  }
+]

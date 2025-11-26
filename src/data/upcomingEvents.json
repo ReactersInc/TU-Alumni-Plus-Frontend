@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Annual Alumni Gala 2024",
+    "date": "April 15, 2025",
+    "time": "6:00 PM - 10:00 PM",
+    "location": "Grand Ballroom, University Center",
+    "description": "Join us for an elegant evening celebrating our alumni achievements and university milestones.",
+    "attendees": 250,
+    "category": "Formal",
+    "image": "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=600",
+    "price": "$125"
+  },
+  {
+    "id": 2,
+    "title": "Tech Innovation Summit",
+    "date": "April 22, 2025",
+    "time": "9:00 AM - 5:00 PM",
+    "location": "Innovation Hub, Building A",
+    "description": "A day-long conference featuring alumni entrepreneurs and tech leaders sharing insights on the future of technology.",
+    "attendees": 180,
+    "category": "Conference",
+    "image": "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=600",
+    "price": "Free"
+  },
+  {
+    "id": 3,
+    "title": "Regional Alumni Meetup - San Francisco",
+    "date": "May 5, 2025",
+    "time": "7:00 PM - 9:00 PM",
+    "location": "Rooftop Lounge, Downtown SF",
+    "description": "Casual networking event for Bay Area alumni. Connect with fellow graduates in your area.",
+    "attendees": 75,
+    "category": "Networking",
+    "image": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600",
+    "price": "$25"
+  },
+  {
+    "id": 4,
+    "title": "Career Mentorship Workshop",
+    "date": "May 12, 2025",
+    "time": "2:00 PM - 4:00 PM",
+    "location": "Virtual Event",
+    "description": "Learn effective mentoring strategies and connect with mentees. Open to all alumni interested in giving back.",
+    "attendees": 120,
+    "category": "Workshop",
+    "image": "https://images.unsplash.com/photo-1721322800607-8c38375eef04?w=600",
+    "price": "Free"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Building a Successful Career in Tech",
+    "excerpt": "Learn how Sanju transformed her passion for coding into a thriving career at a leading tech company.",
+    "image": "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400",
+    "alt": "Success Story",
+    "readTime": "5 min read"
+  },
+  {
+    "id": 2,
+    "title": "From Student to Entrepreneur",
+    "excerpt": "Discover Vikram's journey from a curious student to founding a multi-million dollar startup.",
+    "image": "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400",
+    "alt": "Entrepreneur Story",
+    "readTime": "7 min read"
+  },
+  {
+    "id": 3,
+    "title": "Making a Difference in Healthcare",
+    "excerpt": "Read about Dr. Patel's groundbreaking research in medical innovation and patient care.",
+    "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=400",
+    "alt": "Healthcare Innovation",
+    "readTime": "6 min read"
+  }
+]

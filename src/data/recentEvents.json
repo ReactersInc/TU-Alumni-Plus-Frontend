@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Tech Innovation Summit 2025",
+    "description": "A groundbreaking event where alumni shared insights on emerging technologies including AI, blockchain, and sustainable tech solutions. The summit featured keynote speakers from major tech companies and startup founders.",
+    "attendees": "150+",
+    "speakers": "12",
+    "image": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=300&h=200&fit=crop",
+    "alt": "Tech Innovation Summit"
+  },
+  {
+    "id": 2,
+    "title": "Annual Scholarship Fund Gala",
+    "description": "An inspiring evening dedicated to supporting future students. Alumni came together to raise funds for scholarships, featuring live entertainment, silent auctions, and heartfelt testimonials from scholarship recipients.",
+    "attendees": "200+",
+    "date": "March 5, 2025",
+    "image": "https://images.unsplash.com/photo-1511578314322-379afb476865?w=300&h=200&fit=crop",
+    "alt": "Scholarship Fund Gala"
+  }
+]

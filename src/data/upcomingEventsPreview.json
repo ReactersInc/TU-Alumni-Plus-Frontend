@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Annual Alumni Reunion 2024",
+    "description": "Join us for networking and celebrating achievements",
+    "date": "March 25, 2025",
+    "day": "25",
+    "month": "MAR"
+  },
+  {
+    "id": 2,
+    "title": "Career Mentorship Workshop",
+    "description": "Connect with industry leaders",
+    "date": "April 10, 2025",
+    "day": "10",
+    "month": "APR"
+  }
+]
