@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import heroImage from "/images/TU-gate.png";
 import CampusSlider from "@/components/CampusSlider";
 import alumniStoriesData from "@/data/alumniStories.json";
-import ZubeenTribute from "./ZubeenTribute";
+import ZubeenTribute from "../components/ZubeenTribute";
 import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
 
@@ -78,7 +78,7 @@ const getIcon = (category: string) => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <ZubeenTribute />
+
       <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
         {/* Blurred Background */}
         <div
@@ -145,6 +145,11 @@ const getIcon = (category: string) => {
           </div>
         </div>
       </section>
+
+
+      {/* Zubeen Tribute Section */}
+      <ZubeenTribute />
+
 
       {/* Campus Slider Section */}
       <CampusSlider />
