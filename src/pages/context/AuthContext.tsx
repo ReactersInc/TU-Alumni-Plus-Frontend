@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
+import { apiFetch } from "@/lib/api";
 
 interface AuthContextType {
   isLoggedIn: boolean;
@@ -24,9 +25,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (!token) return;
 
       try {
-        const res = await fetch("http://localhost:5000/api/me", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await apiFetch("/me");
         if (!res.ok) throw new Error("Failed to fetch user");
         const data = await res.json();
         setUser(data.user);

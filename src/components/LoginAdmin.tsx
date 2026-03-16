@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/TabsAndSe
 import { Mail, Lock, User, UserCog } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../pages/context/AuthContext";
+import { apiFetch } from "@/lib/api";
 
 const LoginAdmin = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,9 +25,8 @@ const LoginAdmin = () => {
     setMessage("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/admin/login", {
+      const res = await apiFetch("/admin/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
       const data = await res.json();
@@ -69,9 +69,8 @@ const LoginAdmin = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/api/admin/register", {
+      const res = await apiFetch("/admin/register", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
       const data = await res.json();
@@ -166,11 +165,10 @@ const LoginAdmin = () => {
 
                   {message && (
                     <p
-                      className={`text-center text-sm ${
-                        messageType === "success"
+                      className={`text-center text-sm ${messageType === "success"
                           ? "text-green-600"
                           : "text-red-600"
-                      }`}
+                        }`}
                     >
                       {message}
                     </p>
@@ -289,11 +287,10 @@ const LoginAdmin = () => {
 
                   {message && (
                     <p
-                      className={`text-center text-sm ${
-                        messageType === "success"
+                      className={`text-center text-sm ${messageType === "success"
                           ? "text-green-600"
                           : "text-red-600"
-                      }`}
+                        }`}
                     >
                       {message}
                     </p>

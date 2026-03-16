@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/TabsAndSe
 import { GraduationCap, Lock, Mail } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
+import { apiFetch } from "@/lib/api";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +25,7 @@ const Login = () => {
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<"success" | "error" | "">("");
+  
 
   const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(AuthContext);
@@ -40,9 +42,8 @@ const Login = () => {
     setMessage("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/login", {
+      const res = await apiFetch("/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
@@ -99,11 +100,10 @@ const Login = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+        const res = await apiFetch("/register", {
+          method: "POST",
+          body: JSON.stringify(formData)
+        });
 
       const data = await res.json();
 
@@ -128,7 +128,7 @@ const Login = () => {
   useEffect(() => {
     const fetchSchools = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/schools");
+        const res = await apiFetch("/schools");
         const data = await res.json();
         setSchools(data);
       } catch (err) {
@@ -146,7 +146,7 @@ const Login = () => {
     }
     const fetchDepartments = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/departments/${selectedSchool}`);
+        const res = await apiFetch(`/departments/${selectedSchool}`);
         const data = await res.json();
         setDepartments(data);
       } catch (err) {
