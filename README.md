@@ -1,1 +1,1 @@
-Made by Sakil Aziz and Sanju Kumari Gupta
+Started and Maintained by Sakil Aziz
