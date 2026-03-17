@@ -79,59 +79,77 @@ const Home = () => {
     <div className="min-h-screen">
       {/* Hero Section */}
 
-      <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
+<section className="mx-4 sm:mx-6 lg:mx-0">
 
-        {/* Background Blur */}
-        <div
-          className="absolute inset-0 bg-cover bg-center scale-110 blur-sm"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        ></div>
+  {/* Wrapper */}
+  <div className="relative h-[60vh] sm:h-[65vh] lg:h-[70vh] flex items-center justify-center overflow-hidden 
+  rounded-[2.5rem] sm:rounded-[3rem] lg:rounded-none 
+  shadow-xl lg:shadow-none border border-white/10 lg:border-none">
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-midnight-blue/75 via-dusty-blue/60 to-midnight-blue/75"></div>
+    {/* Background */}
+    <div
+      className="absolute inset-0 bg-cover bg-center scale-105 lg:scale-110 lg:blur-sm 
+      rounded-[2.5rem] sm:rounded-[3rem] lg:rounded-none"
+      style={{ backgroundImage: `url(${heroImage})` }}
+    ></div>
 
-        {/* Main Image */}
-        <div className="relative z-10 flex items-center justify-center w-full h-full px-4">
-          <img
-            src={heroImage}
-            alt="Tezpur University Campus"
-            className="max-h-[80%] w-auto object-contain"
-          />
-        </div>
+    {/* Overlay */}
+    <div className="absolute inset-0 bg-gradient-to-r 
+      from-midnight-blue/85 
+      via-dusty-blue/70 
+      to-midnight-blue/85 
+      lg:from-midnight-blue/75 
+      lg:via-dusty-blue/60 
+      lg:to-midnight-blue/75
+      rounded-[2.5rem] sm:rounded-[3rem] lg:rounded-none">
+    </div>
 
-        {/* ✅ LEFT TEXT (HIDE ON MOBILE) */}
-        <div className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 text-white w-1/3 justify-center">
-          <div className="text-center max-w-xs">
-            <h3 className="text-2xl font-bold mb-4 text-vintage-gold">Discover</h3>
-            <p className="text-sm mb-4">
-              Explore the rich heritage and vibrant community that continues to shape minds and futures.
-            </p>
-            <div className="w-16 h-1 bg-vintage-gold mx-auto"></div>
-          </div>
-        </div>
+    {/* Main Image */}
+    <div className="relative z-10 flex items-center justify-center w-full h-full px-4">
+      <img
+        src={heroImage}
+        alt="Tezpur University Campus"
+        className="max-h-[70%] sm:max-h-[75%] lg:max-h-full object-contain 
+        rounded-[1.5rem] sm:rounded-[2rem] lg:rounded-none 
+        p-3 sm:p-4 lg:p-0 
+        shadow-xl lg:shadow-none"
+      />
+    </div>
 
-        {/* ✅ RIGHT TEXT (HIDE ON MOBILE) */}
-        <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 text-white w-1/3 justify-center">
-          <div className="text-center max-w-xs">
-            <h3 className="text-2xl font-bold mb-4 text-vintage-gold">Connect</h3>
-            <p className="text-sm mb-4">
-              Join a network of accomplished graduates making their mark across industries and continents.
-            </p>
-            <div className="w-16 h-1 bg-vintage-gold mx-auto"></div>
-          </div>
-        </div>
+    {/* Desktop Left */}
+    <div className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 text-white w-1/3 justify-center">
+      <div className="text-center max-w-xs">
+        <h3 className="text-2xl font-bold mb-4 text-vintage-gold">Discover</h3>
+        <p className="text-sm mb-4">
+          Explore the rich heritage and vibrant community that continues to shape minds and futures.
+        </p>
+        <div className="w-16 h-1 bg-vintage-gold mx-auto"></div>
+      </div>
+    </div>
 
-        {/* ✅ MOBILE TEXT (NEW) */}
-        <div className="lg:hidden absolute bottom-6 text-center text-white px-4 z-10">
-          <h2 className="text-xl font-bold mb-2 text-vintage-gold">
-            Discover • Connect
-          </h2>
-          <p className="text-sm">
-            Explore, connect, and grow with your alumni network.
-          </p>
-        </div>
+    {/* Desktop Right */}
+    <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 text-white w-1/3 justify-center">
+      <div className="text-center max-w-xs">
+        <h3 className="text-2xl font-bold mb-4 text-vintage-gold">Connect</h3>
+        <p className="text-sm mb-4">
+          Join a network of accomplished graduates making their mark across industries and continents.
+        </p>
+        <div className="w-16 h-1 bg-vintage-gold mx-auto"></div>
+      </div>
+    </div>
 
-      </section>
+    {/* Mobile + Tablet Text */}
+    <div className="lg:hidden absolute bottom-6 text-center text-white px-4 z-10">
+      <h2 className="text-lg sm:text-xl font-bold text-vintage-gold mb-2">
+        Discover • Connect
+      </h2>
+      <p className="text-xs sm:text-sm max-w-md mx-auto">
+        Explore your alumni network and stay connected with your alma mater.
+      </p>
+    </div>
+
+  </div>
+</section>
 
       {/* Welcome Section */}
       <section className="py-16 bg-gradient-to-b from-powder-blue/20 to-lavender-mist/30">
