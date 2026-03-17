@@ -34,8 +34,8 @@ const Home = () => {
   ];
 
   const [events, setEvents] = useState<any[]>([]);
-const [achievements, setAchievements] = useState<any[]>([]);
-const [loadingAchievements, setLoadingAchievements] = useState(true);
+  const [achievements, setAchievements] = useState<any[]>([]);
+  const [loadingAchievements, setLoadingAchievements] = useState(true);
   const alumniStories = alumniStoriesData;
   useEffect(() => {
     const fetchEvents = async () => {
@@ -50,75 +50,87 @@ const [loadingAchievements, setLoadingAchievements] = useState(true);
     fetchEvents();
   }, []);
   useEffect(() => {
-  const fetchAchievements = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/api/achievements");
-      const data = await res.json();
-      setAchievements(data.achievements || []);
-    } catch (err) {
-      console.error("Error fetching achievements:", err);
-    } finally {
-      setLoadingAchievements(false);
+    const fetchAchievements = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/achievements");
+        const data = await res.json();
+        setAchievements(data.achievements || []);
+      } catch (err) {
+        console.error("Error fetching achievements:", err);
+      } finally {
+        setLoadingAchievements(false);
+      }
+    };
+    fetchAchievements();
+  }, []);
+  const getIcon = (category: string) => {
+    switch (category.toLowerCase()) {
+      case "research":
+        return Award;
+      case "technology":
+        return Trophy;
+      case "arts":
+        return Star;
+      default:
+        return Briefcase;
     }
   };
-  fetchAchievements();
-}, []);
-const getIcon = (category: string) => {
-  switch (category.toLowerCase()) {
-    case "research":
-      return Award;
-    case "technology":
-      return Trophy;
-    case "arts":
-      return Star;
-    default:
-      return Briefcase;
-  }
-};
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
 
-      <section className="relative h-[70vh] flex items-center justify-center overflow-hidden">
-        {/* Blurred Background */}
+      <section className="relative h-[60vh] md:h-[70vh] flex items-center justify-center overflow-hidden">
+
+        {/* Background Blur */}
         <div
           className="absolute inset-0 bg-cover bg-center scale-110 blur-sm"
           style={{ backgroundImage: `url(${heroImage})` }}
         ></div>
 
-        {/* Dark Overlay */}
+        {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-midnight-blue/75 via-dusty-blue/60 to-midnight-blue/75"></div>
 
-        {/* Main Hero Image - Original Size */}
-        <div className="relative z-5 flex items-center justify-center w-full h-full">
+        {/* Main Image */}
+        <div className="relative z-10 flex items-center justify-center w-full h-full px-4">
           <img
             src={heroImage}
             alt="Tezpur University Campus"
-            className="max-h-full max-w-full object-contain"
+            className="max-h-[80%] w-auto object-contain"
           />
         </div>
 
-        {/* Left Side Text - Centered in blur area */}
-        <div className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 text-white w-1/3 flex items-center justify-center lg:flex">
+        {/* ✅ LEFT TEXT (HIDE ON MOBILE) */}
+        <div className="hidden lg:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 text-white w-1/3 justify-center">
           <div className="text-center max-w-xs">
             <h3 className="text-2xl font-bold mb-4 text-vintage-gold">Discover</h3>
-            <p className="text-sm leading-relaxed mb-4">
+            <p className="text-sm mb-4">
               Explore the rich heritage and vibrant community that continues to shape minds and futures.
             </p>
             <div className="w-16 h-1 bg-vintage-gold mx-auto"></div>
           </div>
         </div>
 
-        {/* Right Side Text - Centered in blur area */}
-        <div className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 text-white w-1/3 flex items-center justify-center lg:flex">
+        {/* ✅ RIGHT TEXT (HIDE ON MOBILE) */}
+        <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 text-white w-1/3 justify-center">
           <div className="text-center max-w-xs">
             <h3 className="text-2xl font-bold mb-4 text-vintage-gold">Connect</h3>
-            <p className="text-sm leading-relaxed mb-4">
+            <p className="text-sm mb-4">
               Join a network of accomplished graduates making their mark across industries and continents.
             </p>
             <div className="w-16 h-1 bg-vintage-gold mx-auto"></div>
           </div>
         </div>
+
+        {/* ✅ MOBILE TEXT (NEW) */}
+        <div className="lg:hidden absolute bottom-6 text-center text-white px-4 z-10">
+          <h2 className="text-xl font-bold mb-2 text-vintage-gold">
+            Discover • Connect
+          </h2>
+          <p className="text-sm">
+            Explore, connect, and grow with your alumni network.
+          </p>
+        </div>
+
       </section>
 
       {/* Welcome Section */}
@@ -242,63 +254,63 @@ const getIcon = (category: string) => {
       </section>
 
       {/* Featured Achievements Preview */}
-<section className="py-20 bg-gradient-to-b from-secondary/30 to-background">
-  <div className="container mx-auto px-6">
-    <div className="text-center mb-12">
-      <h2 className="text-4xl md:text-5xl font-bold text-navy mb-6">
-        Featured Achievements
-      </h2>
-      <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-        Celebrate the success of our alumni and get inspired
-      </p>
-    </div>
-
-    {loadingAchievements ? (
-      <p className="text-center text-muted-foreground">Loading achievements...</p>
-    ) : achievements.length === 0 ? (
-      <p className="text-center text-muted-foreground">No achievements yet.</p>
-    ) : (
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {achievements.slice(0, 3).map((achievement, index) => {
-          const Icon = getIcon(achievement.category || "");
-          return (
-            <Card key={index} className="group hover:shadow-[var(--shadow-hover)] transition-all duration-300">
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-navy to-navy-light rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="h-6 w-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Badge className="bg-navy">{achievement.category}</Badge>
-                      <span className="text-sm text-muted-foreground">
-                        Class of {achievement.graduationYear}
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-semibold text-navy mb-1">{achievement.fullName}</h3>
-                    <h4 className="font-medium text-navy-light mb-3">{achievement.achievementTitle}</h4>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {achievement.description}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          );
-        })}
-      </div>
-    )}
-  </div>
-  <div className="text-center mt-12">
-            <Button variant="hero" size="lg" asChild>
-              <Link to="/giveback/achievements">
-                Read All Achievements <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
+      <section className="py-20 bg-gradient-to-b from-secondary/30 to-background">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-navy mb-6">
+              Featured Achievements
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Celebrate the success of our alumni and get inspired
+            </p>
           </div>
-</section>
 
-    
+          {loadingAchievements ? (
+            <p className="text-center text-muted-foreground">Loading achievements...</p>
+          ) : achievements.length === 0 ? (
+            <p className="text-center text-muted-foreground">No achievements yet.</p>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {achievements.slice(0, 3).map((achievement, index) => {
+                const Icon = getIcon(achievement.category || "");
+                return (
+                  <Card key={index} className="group hover:shadow-[var(--shadow-hover)] transition-all duration-300">
+                    <CardContent className="p-6">
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-navy to-navy-light rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                          <Icon className="h-6 w-6 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Badge className="bg-navy">{achievement.category}</Badge>
+                            <span className="text-sm text-muted-foreground">
+                              Class of {achievement.graduationYear}
+                            </span>
+                          </div>
+                          <h3 className="text-lg font-semibold text-navy mb-1">{achievement.fullName}</h3>
+                          <h4 className="font-medium text-navy-light mb-3">{achievement.achievementTitle}</h4>
+                          <p className="text-muted-foreground text-sm leading-relaxed">
+                            {achievement.description}
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          )}
+        </div>
+        <div className="text-center mt-12">
+          <Button variant="hero" size="lg" asChild>
+            <Link to="/giveback/achievements">
+              Read All Achievements <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+        </div>
+      </section>
+
+
 
       <Footer />
 
