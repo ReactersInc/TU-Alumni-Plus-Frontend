@@ -3,6 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "http://cybergarh.tezu.ernet.in:8039/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
