@@ -8,6 +8,37 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 import { apiFetch } from "@/lib/api";
 
+import { z } from "zod";
+
+const registerSchema = z.object({
+  firstName: z.string().min(1, "First name is required"),
+  lastName: z.string().min(1, "Last name is required"),
+
+  enrollmentNumber: z
+    .string()
+    .min(5, "Enrollment number must be at least 5 characters"),
+
+  email: z.string().email("Invalid email"),
+  phone: z.string().regex(/^[0-9]{10}$/, "Phone must be 10 digits"),
+  programme: z.string().min(1, "Programme is required"),
+
+  graduationYear: z.string().refine((val) => {
+    const year = Number(val);
+    return year >= 1950 && year <= 2025;
+  }, "Invalid graduation year"),
+
+  linkedin: z.string().url("Invalid LinkedIn URL"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+  confirmPassword: z.string(),
+
+  schoolId: z.string().min(1, "Select a school"),
+  departmentId: z.string().min(1, "Select a department"),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match",
+  path: ["confirmPassword"],
+});
+
+
 const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [firstName, setFirstName] = useState("");
@@ -19,13 +50,14 @@ const Login = () => {
   const [linkedin, setLinkedin] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [enrollmentNumber, setEnrollmentNumber] = useState("");
   const [schools, setSchools] = useState<{ _id: string; name: string }[]>([]);
   const [departments, setDepartments] = useState<{ _id: string; name: string }[]>([]);
   const [selectedSchool, setSelectedSchool] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<"success" | "error" | "">("");
-  
+
 
   const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(AuthContext);
@@ -53,19 +85,19 @@ const Login = () => {
         localStorage.setItem("token", data.token);
         setIsLoggedIn(true);
         setMessageType("success");
-        setMessage("✅ Login successful!");
+        setMessage(" Login successful!");
         setTimeout(() => {
-          navigate("/") 
-          window.location.reload();   
+          navigate("/")
+          window.location.reload();
         }, 1500);
       } else {
         setMessageType("error");
-        setMessage(data.message || "❌ Invalid email or password");
+        setMessage(data.message || " Invalid email or password");
       }
     } catch (err) {
       console.error(err);
       setMessageType("error");
-      setMessage("⚠️ Something went wrong. Please try again.");
+      setMessage(" Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -76,49 +108,50 @@ const Login = () => {
     setIsLoading(true);
     setMessage("");
 
-    const form = e.currentTarget;
-
     const formData = {
-      firstName: form.firstName.value,
-      lastName: form.lastName.value,
-      email: form.registerEmail.value,
-      phone: form.phone.value,
-      graduationYear: form.graduationYear.value,
-      linkedin: form.linkedin.value,
-      password: form.registerPassword.value,
-      confirmPassword: form.confirmPassword.value,
+      firstName,
+      lastName,
+      enrollmentNumber,
+      email,
+      phone,
+      programme,
+      graduationYear,
+      linkedin,
+      password,
+      confirmPassword,
       schoolId: selectedSchool,
       departmentId: selectedDepartment,
-      programme: form.programme.value,
     };
 
-    if (formData.password !== formData.confirmPassword) {
+    const result = registerSchema.safeParse(formData);
+
+    if (!result.success) {
+      const firstError = result.error.errors[0].message;
       setMessageType("error");
-      setMessage("⚠️ Passwords do not match!");
+      setMessage(` ${firstError}`);
       setIsLoading(false);
       return;
     }
 
     try {
-        const res = await apiFetch("/register", {
-          method: "POST",
-          body: JSON.stringify(formData)
-        });
+      const res = await apiFetch("/register", {
+        method: "POST",
+        body: JSON.stringify(formData),
+      });
 
       const data = await res.json();
 
       if (res.ok) {
         setMessageType("success");
-        setMessage("✅ Registration successful!");
+        setMessage(" Registration successful!");
         setTimeout(() => navigate("/"), 1500);
       } else {
         setMessageType("error");
-        setMessage(data.message || data.error || "❌ Registration failed");
+        setMessage(data.message || " Registration failed");
       }
     } catch (err) {
-      console.error(err);
       setMessageType("error");
-      setMessage("⚠️ Something went wrong. Please try again.");
+      setMessage(" Something went wrong.");
     } finally {
       setIsLoading(false);
     }
@@ -278,6 +311,18 @@ const Login = () => {
                       <Input id="lastName" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} required />
                     </div>
                   </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="enrollmentNumber">Enrollment Number</Label>
+                    <Input
+                      id="enrollmentNumber"
+                      placeholder="Enter your enrollment number"
+                      value={enrollmentNumber}
+                      onChange={(e) => setEnrollmentNumber(e.target.value)}
+                      required
+                    />
+                  </div>
+
                   <div className="space-y-2">
                     <Label htmlFor="registerEmail">Email Address</Label>
                     <Input id="registerEmail" type="email" placeholder="Your email" value={email} onChange={(e) => setEmail(e.target.value)} required />
@@ -312,7 +357,7 @@ const Login = () => {
                     <Input id="graduationYear" type="number" placeholder="2020" min="1950" max="2025" value={graduationYear} onChange={(e) => setGraduationYear(e.target.value)} required />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="linkedin">LinkedIn Profile (optional)</Label>
+                    <Label htmlFor="linkedin">LinkedIn Profile</Label>
                     <Input id="linkedin" type="url" placeholder="https://www.linkedin.com/in/yourprofile" value={linkedin} onChange={(e) => setLinkedin(e.target.value)} />
                   </div>
                   <div className="space-y-2">

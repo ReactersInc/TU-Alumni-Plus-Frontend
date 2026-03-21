@@ -63,7 +63,8 @@ const LoginAdmin = () => {
     }
 
     const formData = {
-      name: `${firstName} ${lastName}`,
+      firstName,
+      lastName,
       email,
       password,
     };
@@ -115,7 +116,7 @@ const LoginAdmin = () => {
         <Tabs defaultValue="login" className="w-full">
           <TabsList className="grid w-full grid-cols-2 mb-6">
             <TabsTrigger value="login">Sign In</TabsTrigger>
-            <TabsTrigger value="register">Register</TabsTrigger>
+            {/* <TabsTrigger value="register">Register</TabsTrigger> */}
           </TabsList>
 
           {/* LOGIN */}
@@ -166,8 +167,8 @@ const LoginAdmin = () => {
                   {message && (
                     <p
                       className={`text-center text-sm ${messageType === "success"
-                          ? "text-green-600"
-                          : "text-red-600"
+                        ? "text-green-600"
+                        : "text-red-600"
                         }`}
                     >
                       {message}
@@ -198,7 +199,7 @@ const LoginAdmin = () => {
           </TabsContent>
 
           {/* REGISTER */}
-          <TabsContent value="register">
+          {/* <TabsContent value="register">
             <Card className="shadow-[var(--shadow-hover)]">
               <CardHeader className="space-y-1">
                 <CardTitle className="text-2xl text-center text-navy">
@@ -288,8 +289,8 @@ const LoginAdmin = () => {
                   {message && (
                     <p
                       className={`text-center text-sm ${messageType === "success"
-                          ? "text-green-600"
-                          : "text-red-600"
+                        ? "text-green-600"
+                        : "text-red-600"
                         }`}
                     >
                       {message}
@@ -308,7 +309,7 @@ const LoginAdmin = () => {
                 </form>
               </CardContent>
             </Card>
-          </TabsContent>
+          </TabsContent> */}
         </Tabs>
 
         <p className="text-center text-white/80 text-sm mt-6">

@@ -24,7 +24,7 @@ interface Alumni {
 }
 
 const batches = [
-  "2024", "2023", "2022", "2021", "2020",
+  "2025", "2024", "2023", "2022", "2021", "2020",
   "2019", "2018", "2017", "2016", "2015"
 ];
 
@@ -42,6 +42,9 @@ const AlumniFamily = () => {
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const [programmes, setProgrammes] = useState<string[]>([]);
+  const [selectedProgramme, setSelectedProgramme] = useState<string | null>(null);
 
   const token = localStorage.getItem("token");
   const isLoggedIn = !!token;
@@ -94,6 +97,26 @@ const AlumniFamily = () => {
 
   }, [selectedSchool]);
 
+  /* ---------------- Fetch Programme ---------------- */
+
+  useEffect(() => {
+    if (!selectedDepartment) return;
+
+    async function fetchProgrammes() {
+      try {
+        const res = await apiFetch(`/programmes/${selectedDepartment}`);
+        const data = await res.json();
+
+        setProgrammes(data.map((p: any) => p.programme));
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch programmes.");
+      }
+    }
+
+    fetchProgrammes();
+  }, [selectedDepartment]);
+
   /* ---------------- Fetch Alumni ---------------- */
 
   useEffect(() => {
@@ -111,9 +134,11 @@ const AlumniFamily = () => {
           `/alumni/filter?school=${selectedSchool}&department=${selectedDepartment}&batch=${selectedBatch}`
         );
 
-        const data: Alumni[] = await res.json();
+        const data = await res.json();
 
-        setAlumniList(data);
+        // console.log("Alumni API response:", data); 
+
+        setAlumniList(Array.isArray(data) ? data : []);
 
       } catch (err) {
 
@@ -275,9 +300,48 @@ const AlumniFamily = () => {
 
         )}
 
-        {/* Step 3: Batch */}
+        {/* Step 3: Programme */}
 
         {selectedDepartment && (
+
+          <Card className="mb-8">
+
+            <CardHeader>
+              <CardTitle className="text-2xl text-navy flex items-center gap-2">
+                <span className="bg-navy text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">
+                  3
+                </span>
+                Select Programme
+              </CardTitle>
+            </CardHeader>
+
+            <CardContent>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+
+                {programmes.map((prog) => (
+                  <Button
+                    key={prog}
+                    variant={selectedProgramme === prog ? "hero" : "outline"}
+                    onClick={() => {
+                      setSelectedProgramme(prog);
+                      setSelectedBatch(null);
+                      setAlumniList([]);
+                    }}
+                  >
+                    {prog}
+                  </Button>
+                ))}
+
+              </div>
+            </CardContent>
+
+          </Card>
+        )}
+
+
+        {/* Step 4: Batch */}
+
+        {selectedProgramme && (
 
           <Card className="mb-8">
 
@@ -286,7 +350,7 @@ const AlumniFamily = () => {
               <CardTitle className="text-2xl text-navy flex items-center gap-2">
 
                 <span className="bg-navy text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">
-                  3
+                  4
                 </span>
 
                 Select Your Batch
@@ -307,9 +371,7 @@ const AlumniFamily = () => {
                     onClick={() => setSelectedBatch(batch)}
                     className="aspect-square"
                   >
-
                     {batch}
-
                   </Button>
 
                 ))}

@@ -4,6 +4,7 @@ import { Button } from "@/components/Button";
 import { Input, Label } from "@/components/FormFields";
 import { Mail, Lock } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
+import { apiFetch } from "@/lib/api";
 
 const ForgotPassword = () => {
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -21,11 +22,11 @@ const ForgotPassword = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/password/forgot-password", {
+      const res = await apiFetch("/password/forgot-password", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email })
       });
+
       const data = await res.json();
       if (res.ok) {
         setMessageType("success");
@@ -49,11 +50,11 @@ const ForgotPassword = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/password/verify-code", {
+      const res = await apiFetch("/password/verify-code", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, code }),
+        body: JSON.stringify({ email, code })
       });
+
       const data = await res.json();
       if (res.ok) {
         setMessageType("success");
@@ -82,10 +83,9 @@ const ForgotPassword = () => {
 
     setIsLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/password/reset-password", {
+      const res = await apiFetch("/password/reset-password", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, code, newPassword }),
+        body: JSON.stringify({ email, code, newPassword })
       });
       const data = await res.json();
       if (res.ok) {
@@ -137,9 +137,8 @@ const ForgotPassword = () => {
                 </div>
                 {message && (
                   <p
-                    className={`text-center text-sm mt-2 ${
-                      messageType === "success" ? "text-green-600" : "text-red-600"
-                    }`}
+                    className={`text-center text-sm mt-2 ${messageType === "success" ? "text-green-600" : "text-red-600"
+                      }`}
                   >
                     {message}
                   </p>
@@ -156,7 +155,9 @@ const ForgotPassword = () => {
                   <Label htmlFor="code">Reset Code</Label>
                   <Input
                     id="code"
-                    type="number"
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={6}
                     placeholder="Enter code"
                     value={code}
                     onChange={(e) => setCode(e.target.value)}
@@ -165,14 +166,13 @@ const ForgotPassword = () => {
                 </div>
                 {message && (
                   <p
-                    className={`text-center text-sm mt-2 ${
-                      messageType === "success" ? "text-green-600" : "text-red-600"
-                    }`}
+                    className={`text-center text-sm mt-2 ${messageType === "success" ? "text-green-600" : "text-red-600"
+                      }`}
                   >
                     {message}
                   </p>
                 )}
-                <Button type="submit" variant="hero" className="w-full" disabled={isLoading}>
+                <Button type="submit"  variant="hero" className="w-full" disabled={isLoading || code.length !== 6}>
                   {isLoading ? "Verifying..." : "Verify Code"}
                 </Button>
               </form>
@@ -208,9 +208,8 @@ const ForgotPassword = () => {
                 </div>
                 {message && (
                   <p
-                    className={`text-center text-sm mt-2 ${
-                      messageType === "success" ? "text-green-600" : "text-red-600"
-                    }`}
+                    className={`text-center text-sm mt-2 ${messageType === "success" ? "text-green-600" : "text-red-600"
+                      }`}
                   >
                     {message}
                   </p>
