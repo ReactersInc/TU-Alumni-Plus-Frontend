@@ -1,16 +1,81 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Basic -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TU-Alumni-Plus</title>
+
+    <!-- Title (VERY IMPORTANT for SEO) -->
+    <title>Tezpur University Alumni Association | AlumniPlus</title>
+
+    <!-- SEO Meta -->
+    <meta
+      name="description"
+      content="Official Alumni Association platform of Tezpur University. Connect with alumni, explore opportunities, events, and stay engaged with the TU community."
+    />
+    <meta
+      name="keywords"
+      content="Tezpur University alumni, TU alumni, alumni association, alumni network India, university alumni platform"
+    />
     <meta name="author" content="Sakil Aziz" />
 
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://alumniplus.online/" />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/tulogo.png" />
+
+    <!-- Open Graph (for social + Google) -->
+    <meta property="og:title" content="Tezpur University Alumni Association" />
+    <meta
+      property="og:description"
+      content="Official alumni platform of Tezpur University to connect, collaborate, and grow."
+    />
+    <meta property="og:url" content="https://alumniplus.online/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://alumniplus.online/tulogo.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Tezpur University Alumni Association" />
+    <meta
+      name="twitter:description"
+      content="Connect with Tezpur University alumni, explore opportunities and stay engaged."
+    />
+    <meta name="twitter:image" content="https://alumniplus.online/tulogo.png" />
+
+    <!-- Structured Data (VERY IMPORTANT) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Tezpur University Alumni Association",
+        "url": "https://alumniplus.online",
+        "logo": "https://alumniplus.online/tulogo.png",
+        "sameAs": []
+      }
+    </script>
   </head>
 
   <body>
+    <!-- Fallback content for SEO (important for React apps) -->
+    <noscript>
+      <h1>Tezpur University Alumni Association</h1>
+      <p>
+        Welcome to the official alumni association platform of Tezpur University.
+        Connect with alumni, explore opportunities, and stay engaged with the TU community.
+      </p>
+    </noscript>
+
+    <!-- React Root -->
     <div id="root"></div>
+
+    <!-- Vite Entry -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
+```
