@@ -23,12 +23,14 @@ interface Alumni {
   linkedin?: string;
 }
 
-const batches = [
-  "2025", "2024", "2023", "2022", "2021", "2020",
-  "2019", "2018", "2017", "2016", "2015"
-];
+// const batches = [
+//   "2025", "2024", "2023", "2022", "2021", "2020",
+//   "2019", "2018", "2017", "2016", "2015"
+// ];
+
 
 const AlumniFamily = () => {
+const [batches, setBatches] = useState<string[]>([]);
 
   const [schools, setSchools] = useState<School[]>([]);
   const [departments, setDepartments] = useState<Record<string, Department[]>>({});
@@ -117,6 +119,31 @@ const AlumniFamily = () => {
     fetchProgrammes();
   }, [selectedDepartment]);
 
+  /* ---------------- Fetch Batches ---------------- */
+
+  useEffect(() => {
+    if (!selectedSchool || !selectedDepartment || !selectedProgramme) return;
+
+    async function fetchBatches() {
+      try {
+        const res = await apiFetch(
+          `/alumni/batches?school=${selectedSchool}&department=${selectedDepartment}&programme=${selectedProgramme}`
+        );
+
+        const data = await res.json();
+
+        setBatches(data.map((b: any) => String(b.graduation_year)));
+
+      } catch (err) {
+        console.error(err);
+        setError("Failed to fetch batches.");
+      }
+    }
+
+    fetchBatches();
+  }, [selectedSchool, selectedDepartment, selectedProgramme]);
+
+
   /* ---------------- Fetch Alumni ---------------- */
 
   useEffect(() => {
@@ -131,7 +158,7 @@ const AlumniFamily = () => {
         setSearch("");  //  reset search when filters change
 
         const res = await apiFetch(
-          `/alumni/filter?school=${selectedSchool}&department=${selectedDepartment}&batch=${selectedBatch}`
+          `/alumni/filter?school=${selectedSchool}&department=${selectedDepartment}&programme=${selectedProgramme}&batch=${selectedBatch}`
         );
 
         const data = await res.json();
@@ -155,7 +182,7 @@ const AlumniFamily = () => {
 
     fetchAlumni();
 
-  }, [selectedSchool, selectedDepartment, selectedBatch]);
+ }, [selectedSchool, selectedDepartment, selectedProgramme, selectedBatch]);
 
   /* ---------------- Search Filter ---------------- */
 

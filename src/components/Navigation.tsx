@@ -56,7 +56,7 @@ const Navigation = () => {
             <Link to="/" className="flex items-center gap-2">
               <img src="/tulogo.png" className="h-10 w-10 rounded-full" />
               <span className="flex items-center text-lg font-semibold text-navy">
-                TU Alumni
+                Tezpur University Alumni
                 <Plus className="h-5 w-5 ml-1" />
               </span>
             </Link>
