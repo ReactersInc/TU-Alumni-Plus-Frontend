@@ -3,24 +3,30 @@ import { Link } from "react-router-dom";
 const About = () => {
   // Static admin list (you can later replace this with data from backend)
   const admins = [
+    // {
+    //   name: "	Dr. Nabajyoti Medhi",
+    //   email: "nmedhi@tezu.ernet.in",
+    //   photo: "/admins/nabo.jpg",
+    //   role: "Head, Alumni Relations",
+    // },
+    // {
+    //   name: "	Dr. Nityananda Sarma",
+    //   email: "nitya@tezu.ernet.in",
+    //   photo: "/admins/ns.jpg",
+    //   role: "System Administrator",
+    // },
+    // {
+    //   name: "Dr. Jyotismita Talukdar",
+    //   email: " jyoti4@tezu.ernet.in",
+    //   photo: "/admins/jyotismita.jpg",
+    //   role: "Event Coordinator",
+    // },
     {
-      name: "	Dr. Nabajyoti Medhi",
-      email: "nmedhi@tezu.ernet.in",
-      photo: "/admins/nabo.jpg",
-      role: "Head, Alumni Relations",
-    },
-    {
-      name: "	Dr. Nityananda Sarma",
-      email: "nitya@tezu.ernet.in",
-      photo: "/admins/ns.jpg",
-      role: "System Administrator",
-    },
-    {
-      name: "Dr. Jyotismita Talukdar",
-      email: " jyoti4@tezu.ernet.in",
+      name: "Ms. Deena Davy",
+      email: " deena@tezu.ernet.in",
       photo: "/admins/jyotismita.jpg",
-      role: "Event Coordinator",
-    },
+      role: "Alumni Officer cum Convernor",
+    }
   ];
 
   return (

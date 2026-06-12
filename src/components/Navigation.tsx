@@ -1,8 +1,9 @@
 import { useState, useContext, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/Button";
-import { ChevronDown, Plus, Menu, X } from "lucide-react";
+import { ChevronDown, Plus, Menu, X, Download } from "lucide-react";
 import { AuthContext } from "../pages/context/AuthContext";
+import { API_BASE_URL } from "@/lib/api";
 
 const Navigation = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -13,6 +14,49 @@ const Navigation = () => {
     localStorage.clear();
     window.location.href = "/";
   };
+
+  const handleDownloadICard = async () => {
+    try {
+
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        `${API_BASE_URL}/id-card/pdf`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to download");
+      }
+
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "TU-Alumni-ID-Card.pdf";
+
+      document.body.appendChild(a);
+      a.click();
+
+      document.body.removeChild(a);
+
+      window.URL.revokeObjectURL(url);
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert("Unable to download ID Card");
+
+    }
+  };
+
 
   const handleMobileClick = () => {
     setMobileOpen(false);
@@ -116,12 +160,22 @@ const Navigation = () => {
             {/* 🔴 RIGHT: ACTIONS */}
             <div className="hidden md:flex items-center gap-4">
               {isLoggedIn ? (
-                <button
-                  onClick={handleLogout}
-                  className="px-4 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600"
-                >
-                  Logout
-                </button>
+                <>
+                  <button
+                    onClick={handleDownloadICard}
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-green-600 text-white hover:bg-green-700"
+                  >
+                    <Download size={16} />
+                    I-Card
+                  </button>
+
+                  <button
+                    onClick={handleLogout}
+                    className="px-4 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600"
+                  >
+                    Logout
+                  </button>
+                </>
               ) : (
                 <Button variant="hero" asChild>
                   <Link to="/login">Login</Link>
@@ -141,9 +195,8 @@ const Navigation = () => {
 
           {/* 📱 MOBILE MENU */}
           <div
-            className={`md:hidden transition-all duration-300 ${
-              mobileOpen ? "max-h-[600px] mt-4" : "max-h-0 overflow-hidden"
-            }`}
+            className={`md:hidden transition-all duration-300 ${mobileOpen ? "max-h-[600px] mt-4" : "max-h-0 overflow-hidden"
+              }`}
           >
             <div className="bg-white rounded-2xl shadow-xl border p-4 flex flex-col gap-3 relative z-50">
 
@@ -180,17 +233,34 @@ const Navigation = () => {
               <hr />
 
               {isLoggedIn ? (
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    handleMobileClick();
-                  }}
-                  className="text-red-600 text-left"
-                >
-                  Logout
-                </button>
+                <>
+                  <button
+                    onClick={() => {
+                      handleDownloadICard();
+                      handleMobileClick();
+                    }}
+                    className="text-green-700 text-left font-medium"
+                  >
+                    Download I-Card
+                  </button>
+
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      handleMobileClick();
+                    }}
+                    className="text-red-600 text-left"
+                  >
+                    Logout
+                  </button>
+                </>
               ) : (
-                <Link to="/login" onClick={handleMobileClick}>Login</Link>
+                <Link
+                  to="/login"
+                  onClick={handleMobileClick}
+                >
+                  Login
+                </Link>
               )}
 
             </div>
