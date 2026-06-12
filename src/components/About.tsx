@@ -24,7 +24,7 @@ const About = () => {
     {
       name: "Ms. Deena Davy",
       email: " deena@tezu.ernet.in",
-      photo: "/admins/jyotismita.jpg",
+      photo: "/admins/Screenshot_20260612-115802.LinkedIn.png",
       role: "Alumni Officer cum Convernor",
     }
   ];
