@@ -21,7 +21,7 @@ const Navigation = () => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `${API_BASE_URL}/id-card/`,
+        `${API_BASE_URL}/id-card/pdf`,
         {
           headers: {
             Authorization: `Bearer ${token}`
